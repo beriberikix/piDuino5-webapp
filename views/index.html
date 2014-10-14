@@ -31,49 +31,40 @@
 </div>
 
 <script src="/bower_components/virtualjoystick.js/virtualjoystick.js"></script>
+<script src="/bower_components/uri.js/src/URI.min.js"></script>
 <script>
-  var host = window.location.host.replace(/:.*/, '');
-  var ws = new WebSocket('ws://' + host );
+  var ws = new WebSocket('ws://' + URI('<%= publicurl %>').host());
 
-  var forward = function() {
-    ws.send('forward');
-  }
-
-  var joystick	= new VirtualJoystick({
+  var joystick  = new VirtualJoystick({
     container : document.getElementById('container'),
     mouseSupport : true
   });
 
   function step(timestamp) {
     if( joystick.up() ) {
-ws.send('forward');
+      ws.send('forward');
     }
 
     if( joystick.down() ) {
-//      reverse();
-ws.send('reverse');
+      ws.send('reverse');
     }
 
     if( joystick.right() ) {
-//      gee();
-ws.send('turnRight');
+      ws.send('turnRight');
     } 
 
     if( joystick.left() ) {
-//      haw();
-ws.send('turnLeft');
+      ws.send('turnLeft');
     }
 
     if( joystick.deltaX() === 0 && joystick.deltaY() === 0 && ws.readyState === 1) {
-//      halt();
-//ws.send('halt');
+      ws.send('stop');
     }
 
-    webkitRequestAnimationFrame(step);
+    requestAnimationFrame(step);
   }
 
-  webkitRequestAnimationFrame(step);
+  requestAnimationFrame(step);
 </script>
 </body>
 </html>
-
