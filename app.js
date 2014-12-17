@@ -19,7 +19,7 @@ app.get('/', function(req, res) {
 app.post('/locate', function(req, res) {
   lastLocation = {
     localip: req.param('local_ip'),
-    publicurl: req.param('public_url'),
+    // publicurl: req.param('public_url'),
     lastUpdate: new Date().toString()
   };
 });
