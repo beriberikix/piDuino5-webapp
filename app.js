@@ -1,7 +1,7 @@
 var express = require('express'),
     app = express(),
     PORT = 3000,
-    lastLocation = {};
+    localip;
 
 //configure Express
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
@@ -13,13 +13,9 @@ var server = app.listen(PORT, function() {
 });
 
 app.get('/', function(req, res) {
-  res.render('index', lastLocation);
+  res.render('index', { localip : localip });
 });
 
 app.post('/locate', function(req, res) {
-  lastLocation = {
-    localip: req.param('local_ip'),
-    // publicurl: req.param('public_url'),
-    lastUpdate: new Date().toString()
-  };
+  localip = req.param('local_ip');
 });

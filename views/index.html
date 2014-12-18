@@ -21,19 +21,15 @@
     }
   </style>
 
-  <title>PiDuino</title>
+  <title>piDuino5</title>
 </head>
 <body>
 
-<div id="container">
-  <button id="forward" disabled="disabled">Forward</button>
-  <button id="reverse" disabled="disabled">Reverse</button>
-</div>
+<div id="container"></div>
 
 <script src="/bower_components/virtualjoystick.js/virtualjoystick.js"></script>
-<script src="/bower_components/uri.js/src/URI.min.js"></script>
 <script>
-  var ws = new WebSocket('ws://' + URI('<%= localip %>').host() + ':8080');
+  var ws = new WebSocket('ws://<%= localip %>:8080');
 
   var joystick  = new VirtualJoystick({
     container : document.getElementById('container'),
